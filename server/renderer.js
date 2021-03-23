@@ -33,6 +33,8 @@ class RendererHandler {
           `<script type="module" src="//${host}/client.js" defer></script>`
         );
 
+        res.write(`<link rel="modulepreload" href="//${host}/Page.js">`);
+
         for (const key in store.componentTree) {
           if (Object.hasOwnProperty.call(store.componentTree, key)) {
             const sections = store.componentTree[key];
