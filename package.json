@@ -2,9 +2,13 @@
   "name": "rubics-react-server",
   "version": "1.0.0",
   "description": "Boilerplate for Rubics theme servers using React",
-  "main": "server.js",
+  "main": "app.js",
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ludens-reklamebyra/rubics-react-server/issues"
   },
-  "homepage": "https://github.com/ludens-reklamebyra/rubics-react-server#readme"
+  "homepage": "https://github.com/ludens-reklamebyra/rubics-react-server#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
