@@ -1,6 +1,6 @@
 import RequestUtil from "./util.js";
 
-class Renderer {
+class RendererHandler {
   static render(req, res) {
     let body = "";
 
@@ -14,6 +14,7 @@ class Renderer {
 
     req.on("end", function () {
       try {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         const json = JSON.parse(body);
         res.end(JSON.stringify(json));
       } catch (error) {
@@ -23,4 +24,4 @@ class Renderer {
   }
 }
 
-export default Renderer;
+export default RendererHandler;

@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { SECRET } from "../lib/constants.js";
-import Renderer from "./renderer.js";
+import ConfigHandler from "./config.js";
+import RendererHandler from "./renderer.js";
 import RequestUtil from "./util.js";
 
 class Router {
@@ -16,9 +17,12 @@ class Router {
       }
 
       switch (req.url) {
+        case "/config":
+          ConfigHandler.serve(req, res);
+          break;
         case "/render":
           if (req.method === "POST") {
-            Renderer.render(req, res);
+            RendererHandler.render(req, res);
           } else {
             RequestUtil.badRequest(400, "Must be POST")(req, res);
           }

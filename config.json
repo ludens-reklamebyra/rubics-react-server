@@ -1,0 +1,12 @@
+{
+    "hasEcommerce": true,
+    "components": [
+        {
+            "name": "MyComponent",
+            "label": "Min komponent",
+            "usableInSection": true,
+            "usableInRichContent": false,
+            "props": []
+        }
+    ]
+}
