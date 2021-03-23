@@ -6,7 +6,13 @@
             "label": "Min komponent",
             "usableInSection": true,
             "usableInRichContent": false,
-            "props": []
+            "props": [
+                {
+                    "name": "image",
+                    "label": "Bilde",
+                    "type": "image"
+                }
+            ]
         }
     ]
 }

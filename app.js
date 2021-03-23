@@ -1,8 +1,13 @@
 import Server from "./server/server.js";
 import { PORT } from "./lib/constants.js";
+import bootstrapper from "./bootstrapper.js";
 
-const server = new Server();
+(async function start() {
+  await bootstrapper.bootstrap();
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  const server = new Server();
+
+  server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+})();
