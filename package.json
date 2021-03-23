@@ -1,0 +1,19 @@
+{
+  "name": "rubics-react-server",
+  "version": "1.0.0",
+  "description": "Boilerplate for Rubics theme servers using React",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludens-reklamebyra/rubics-react-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ludens-reklamebyra/rubics-react-server/issues"
+  },
+  "homepage": "https://github.com/ludens-reklamebyra/rubics-react-server#readme"
+}
