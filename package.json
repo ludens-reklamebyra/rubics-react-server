@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ludens-reklamebyra/rubics-react-server#readme",
   "dependencies": {
+    "@ludens-reklame/rubics-react": "file:.yalc/@ludens-reklame/rubics-react",
+    "@ludens-reklame/rubics-sdk": "file:.yalc/@ludens-reklame/rubics-sdk",
     "dotenv": "^8.2.0",
     "finalhandler": "^1.1.2",
     "react": "^17.0.2",

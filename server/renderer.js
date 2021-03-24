@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server.js";
+import Page from "@ludens-reklame/rubics-react/dist/components/Page.js";
 import RequestUtil from "./util.js";
-import Page from "../client-build/Page.js";
 import bootstrapper from "../bootstrapper.js";
 
 class RendererHandler {
@@ -36,8 +36,6 @@ class RendererHandler {
           `<script type="module" src="//${host}/client.js" defer></script>`
         );
 
-        res.write(`<link rel="modulepreload" href="//${host}/Page.js">`);
-
         for (const key in store.componentTree) {
           if (Object.hasOwnProperty.call(store.componentTree, key)) {
             const sections = store.componentTree[key];
@@ -64,10 +62,9 @@ class RendererHandler {
 
         res.write('<div id="app">');
 
-        const page = React.createElement(Page, {
-          renderer: "server",
+        const page = React.createElement(Page.default, {
           store,
-          components: bootstrapper.components,
+          renderComponent,
         });
 
         const stream = ReactDOMServer.renderToNodeStream(page);
@@ -99,6 +96,19 @@ class RendererHandler {
 
     return css;
   }
+}
+
+function renderComponent(component, props, children) {
+  const Component = bootstrapper.components[component.component];
+
+  return React.createElement(
+    "div",
+    {
+      id: component.name,
+      className: "component",
+    },
+    React.createElement(Component, props, children)
+  );
 }
 
 export default RendererHandler;

@@ -2,3 +2,5 @@ node_modules
 public
 client-build
 .env
+.yalc
+yalc.lock
