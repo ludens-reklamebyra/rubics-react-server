@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "build": "snowpack build"
+    "build": "babel ./client -d ./client-build && webpack --config webpack.config.js",
+    "dev": "npm run build && nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,19 @@
   "homepage": "https://github.com/ludens-reklamebyra/rubics-react-server#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "node-static": "^0.7.11",
+    "finalhandler": "^1.1.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "serve-static": "^1.14.1"
   },
   "devDependencies": {
-    "snowpack": "^3.1.2"
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack": "^5.27.2",
+    "webpack-cli": "^4.5.0"
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server.js";
 import RequestUtil from "./util.js";
-import Page from "../build/Page.js";
+import Page from "../client-build/Page.js";
 import bootstrapper from "../bootstrapper.js";
 
 class RendererHandler {
@@ -64,7 +64,7 @@ class RendererHandler {
         const page = React.createElement(Page, {
           renderer: "server",
           store,
-          getComponent: RendererHandler.#getComponent,
+          components: bootstrapper.components,
         });
 
         const stream = ReactDOMServer.renderToNodeStream(page);
@@ -79,14 +79,6 @@ class RendererHandler {
         RequestUtil.badRequest(400, "Bad JSON")(req, res);
       }
     });
-  }
-
-  static #getComponent(componentName) {
-    if (componentName in bootstrapper.components) {
-      return bootstrapper.components[componentName];
-    }
-
-    return null;
   }
 }
 

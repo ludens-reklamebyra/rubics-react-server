@@ -1,6 +1,6 @@
 import React from "react";
 
-function Page({ renderer, store, getComponent }) {
+function Page({ renderer, store, components }) {
   const main = store.componentTree.main;
 
   return (
@@ -10,26 +10,30 @@ function Page({ renderer, store, getComponent }) {
           key={s.name}
           renderer={renderer}
           section={s}
-          getComponent={getComponent}
+          components={components}
         />
       ))}
     </div>
   );
 }
 
-function Section({ renderer, section, getComponent }) {
+function Section({ renderer, section, components }) {
   if (renderer === "server") {
-    const Component = getComponent(section.component);
+    if (section.component in components) {
+      const Component = components[section.component];
 
-    return (
-      <div id={section.name}>
-        <Component {...section.props} />
-      </div>
-    );
+      return (
+        <div id={section.name}>
+          <Component {...section.props} />
+        </div>
+      );
+    }
+
+    return null;
   }
 
   const Component = React.lazy(() =>
-    import(`/components/${section.component}.js`)
+    import(`./components/${section.component}.js`)
   );
 
   return (

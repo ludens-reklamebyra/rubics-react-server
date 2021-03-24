@@ -1,5 +1,5 @@
 import Server from "./server/server.js";
-import { PORT } from "./lib/constants.js";
+import { PORT } from "./constants.js";
 import bootstrapper from "./bootstrapper.js";
 
 (async function start() {

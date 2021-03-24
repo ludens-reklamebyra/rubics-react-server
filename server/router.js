@@ -1,11 +1,12 @@
 import crypto from "crypto";
-import nodeStatic from "node-static";
-import { SECRET } from "../lib/constants.js";
+import finalhandler from "finalhandler";
+import serveStatic from "serve-static";
+import { SECRET } from "../constants.js";
 import ConfigHandler from "./config.js";
 import RendererHandler from "./renderer.js";
 import RequestUtil from "./util.js";
 
-const fileServer = new nodeStatic.Server("./build");
+const fileServer = serveStatic("public");
 
 class Router {
   constructor() {
@@ -45,11 +46,7 @@ class Router {
             break;
         }
       } else {
-        req
-          .addListener("end", function () {
-            fileServer.serve(req, res);
-          })
-          .resume();
+        fileServer(req, res, finalhandler(req, res));
       }
     };
   }
