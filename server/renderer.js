@@ -23,7 +23,10 @@ class RendererHandler {
         const host = req.headers["host"];
         const json = JSON.parse(body);
         const store = json.store;
+        const themeConfig = store.themeConfig;
         const preloadedComponents = [];
+
+        res.write(RendererHandler.#createCssVariables(themeConfig));
 
         res.write(
           `<link rel="stylesheet" type="text/css" href="//${host}/css/base.css" />`
@@ -79,6 +82,22 @@ class RendererHandler {
         RequestUtil.badRequest(400, "Bad JSON")(req, res);
       }
     });
+  }
+
+  static #createCssVariables(themeConfig) {
+    let css = "<style>:root{";
+
+    for (const key in themeConfig) {
+      if (Object.hasOwnProperty.call(themeConfig, key)) {
+        const value = themeConfig[key];
+
+        css += `--${key}: ${value};`;
+      }
+    }
+
+    css += "}</style>";
+
+    return css;
   }
 }
 

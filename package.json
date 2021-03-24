@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "build": "babel ./client -d ./client-build && webpack --config webpack.config.js",
+    "build": "babel ./client -d ./client-build && snowpack build",
     "dev": "npm run build && nodemon app.js"
   },
   "repository": {
@@ -34,9 +34,6 @@
     "@babel/core": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "babel-cli": "^6.26.0",
-    "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "webpack": "^5.27.2",
-    "webpack-cli": "^4.5.0"
+    "snowpack": "^3.1.2"
   }
 }

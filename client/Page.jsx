@@ -47,7 +47,9 @@ function Section({ renderer, section, components }) {
         />
       }
     >
-      <Component {...section.props} />
+      <div id={section.name}>
+        <Component {...section.props} />
+      </div>
     </React.Suspense>
   );
 }
