@@ -23,10 +23,7 @@ class RendererHandler {
         const host = req.headers["host"];
         const json = JSON.parse(body);
         const store = json.store;
-        const themeConfig = store.themeConfig;
         const preloadedComponents = [];
-
-        res.write(RendererHandler.#createCssVariables(themeConfig));
 
         res.write(
           `<link rel="stylesheet" type="text/css" href="//${host}/css/base.css" />`
@@ -62,9 +59,10 @@ class RendererHandler {
 
         res.write('<div id="app">');
 
-        const page = React.createElement(Page.default, {
+        const page = React.createElement(Page, {
           store,
           renderComponent,
+          renderGlobalCss: RendererHandler.#createCssVariables,
         });
 
         const stream = ReactDOMServer.renderToNodeStream(page);
@@ -82,7 +80,7 @@ class RendererHandler {
   }
 
   static #createCssVariables(themeConfig) {
-    let css = "<style>:root{";
+    let css = ":root{";
 
     for (const key in themeConfig) {
       if (Object.hasOwnProperty.call(themeConfig, key)) {
@@ -92,7 +90,7 @@ class RendererHandler {
       }
     }
 
-    css += "}</style>";
+    css += "}";
 
     return css;
   }
@@ -104,8 +102,7 @@ function renderComponent(component, props, children) {
   return React.createElement(
     "div",
     {
-      id: component.name,
-      className: "component",
+      id: `c_${component.name}`,
     },
     React.createElement(Component, props, children)
   );
