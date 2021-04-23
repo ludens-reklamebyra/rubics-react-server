@@ -39,15 +39,20 @@ function ClientComponent({ component, props, children }) {
   );
 
   const componentId = `c_${component.name}`;
+  const elem = document.getElementById(componentId);
 
   return (
     <React.Suspense
       fallback={
         <div
           id={componentId}
-          dangerouslySetInnerHTML={{
-            __html: document.getElementById(componentId).innerHTML,
-          }}
+          dangerouslySetInnerHTML={
+            elem
+              ? {
+                  __html: elem.innerHTML,
+                }
+              : undefined
+          }
         />
       }
     >

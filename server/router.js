@@ -4,6 +4,7 @@ import serveStatic from "serve-static";
 import { SECRET } from "../constants.js";
 import ConfigHandler from "./config.js";
 import RendererHandler from "./renderer.js";
+import SeederHandler from "./seeder.js";
 import RequestUtil from "./util.js";
 
 const fileServer = serveStatic("public");
@@ -26,7 +27,7 @@ class Router {
         return;
       }
 
-      if (["/config", "/render"].includes(req.url)) {
+      if (["/config", "/seeder", "/render"].includes(req.url)) {
         if (!this.#validateRequest(req)) {
           RequestUtil.badRequest(401, "Bad secret")(req, res);
           return;
@@ -35,6 +36,11 @@ class Router {
         switch (req.url) {
           case "/config":
             ConfigHandler.serve(req, res);
+
+            break;
+          case "/seeder":
+            SeederHandler.serve(req, res);
+
             break;
           case "/render":
             if (req.method === "POST") {

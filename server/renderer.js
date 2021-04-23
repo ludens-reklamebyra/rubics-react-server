@@ -97,15 +97,19 @@ class RendererHandler {
 }
 
 function renderComponent(component, props, children) {
-  const Component = bootstrapper.components[component.component];
+  if (component.component in bootstrapper.components) {
+    const Component = bootstrapper.components[component.component];
 
-  return React.createElement(
-    "div",
-    {
-      id: `c_${component.name}`,
-    },
-    React.createElement(Component, props, children)
-  );
+    return React.createElement(
+      "div",
+      {
+        id: `c_${component.name}`,
+      },
+      React.createElement(Component, props, children)
+    );
+  }
+
+  return null;
 }
 
 export default RendererHandler;

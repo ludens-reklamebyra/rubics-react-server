@@ -13,6 +13,7 @@ class ConfigHandler {
     const configFile = fs.readFileSync(
       path.join(path.resolve(), "config.json")
     );
+
     return configFile.toString("utf-8");
   }
 }
