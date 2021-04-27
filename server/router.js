@@ -2,9 +2,7 @@ import crypto from "crypto";
 import finalhandler from "finalhandler";
 import serveStatic from "serve-static";
 import { SECRET } from "../constants.js";
-import ConfigHandler from "./config.js";
 import RendererHandler from "./renderer.js";
-import SeederHandler from "./seeder.js";
 import RequestUtil from "./util.js";
 
 const fileServer = serveStatic("public");
@@ -27,29 +25,16 @@ class Router {
         return;
       }
 
-      if (["/config", "/seeder", "/render"].includes(req.url)) {
+      if (["/render"].includes(req.url)) {
         if (!this.#validateRequest(req)) {
           RequestUtil.badRequest(401, "Bad secret")(req, res);
           return;
         }
 
-        switch (req.url) {
-          case "/config":
-            ConfigHandler.serve(req, res);
-
-            break;
-          case "/seeder":
-            SeederHandler.serve(req, res);
-
-            break;
-          case "/render":
-            if (req.method === "POST") {
-              RendererHandler.render(req, res);
-            } else {
-              RequestUtil.badRequest(400, "Must be POST")(req, res);
-            }
-
-            break;
+        if (req.method === "POST") {
+          RendererHandler.render(req, res);
+        } else {
+          RequestUtil.badRequest(400, "Must be POST")(req, res);
         }
       } else {
         fileServer(req, res, finalhandler(req, res));
