@@ -34,7 +34,7 @@ class Bootstrapper {
     const files = fs.readdirSync(path.join(path.resolve(), "client/css"));
 
     for (const file of files) {
-      if (file.endsWith(".css") && file !== "base.css") {
+      if (file.endsWith(".css")) {
         const css = fs
           .readFileSync(path.join(path.resolve(), "client/css", file))
           .toString("utf-8");

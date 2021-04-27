@@ -25,9 +25,9 @@ class RendererHandler {
         const store = json.store;
         const preloadedComponents = [];
 
-        res.write(
-          `<link rel="stylesheet" type="text/css" href="//${host}/css/base.css" />`
-        );
+        if ("base" in bootstrapper.css) {
+          res.write(`<style>${bootstrapper.css.base}</style>`);
+        }
 
         res.write(
           `<script type="module" src="//${host}/client.js" defer></script>`
@@ -39,12 +39,6 @@ class RendererHandler {
 
             for (const section of sections) {
               if (!preloadedComponents.includes(section.component)) {
-                if (section.component in bootstrapper.css) {
-                  res.write(
-                    `<style>${bootstrapper.css[section.component]}</style>`
-                  );
-                }
-
                 if (section.component in bootstrapper.components) {
                   res.write(
                     `<link rel="modulepreload" href="//${host}/components/${section.component}.js">`

@@ -20,6 +20,11 @@
                     "type": "string"
                 },
                 {
+                    "name": "num",
+                    "label": "Num",
+                    "type": "number"
+                },
+                {
                     "name": "image",
                     "label": "Bilde",
                     "type": "image"
