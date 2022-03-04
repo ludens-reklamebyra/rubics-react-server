@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Page from "@ludens-reklame/rubics-react/dist/components/Page.js";
 
-ReactDOM.hydrate(
+ReactDOM.hydrateRoot(
+  document.querySelector("#app"),
   <Page
     store={_STORE}
     renderComponent={renderComponent}
     renderGlobalCss={createCssVariables}
-  />,
-  document.querySelector("#app")
+  />
 );
 
 function renderComponent(component, props, children) {

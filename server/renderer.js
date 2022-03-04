@@ -45,6 +45,12 @@ class RendererHandler {
                   );
                 }
 
+                if (section.component in bootstrapper.css) {
+                  res.write(
+                    `<style>${bootstrapper.css[section.component]}</style>`
+                  );
+                }
+
                 preloadedComponents.push(section.component);
               }
             }

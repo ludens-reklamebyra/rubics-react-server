@@ -1,0 +1,4 @@
+.Header span {
+  display: block;
+  color: var(--colorSecondary);
+}
